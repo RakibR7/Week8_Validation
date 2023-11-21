@@ -1,16 +1,14 @@
 package atu.ie.week_8_springboot_validation;
 
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
 public class Person {
-    @NotBlank
+    @NotBlank(message = "Name cannot be blank")
+    @Size(min = 2, max = 50, message = "Name must be between 2 & 50 char")
     private String name;
     @Min(16)
     private int age;
@@ -25,7 +23,7 @@ public class Person {
     @NotBlank
     private String position;
 
-    @NotNull
+    @NotBlank
     private String department;
 }
 

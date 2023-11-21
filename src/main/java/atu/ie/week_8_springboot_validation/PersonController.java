@@ -10,21 +10,20 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class PersonController {
     private final PersonService personService;
-
-    public PersonController(PersonService personService) { this.personService = personService};
+    public PersonController(PersonService personService) { this.personService = personService; }
 
     @GetMapping("/{employeeId}")
-    public ResponseEntity<?> getPerson(@PathVariable) String emplpyeeId){
-        if (employeeId.length() > 5 || employeeID.isBlank()) {
-            return ResponseEntity.badRequest().body("Employee is invalid");
-
-            Person person = personService.getPersonByEmplyeeId(employeeId);
-
-            if (person == null) {
-                return ResponseEntity.notFound().build();
-            }
-
-
+    public ResponseEntity<?> getPerson(@PathVariable String employeeId) {
+        if (employeeId.length() > 5 || employeeId.isBlank()) {
+            return ResponseEntity.badRequest().body("EmployeeId is invalid");
         }
+
+        Person person = personService.getPersonByEmployeeId(employeeId);
+
+        if (person == null) {
+            return ResponseEntity.notFound().build();
         }
+
+        return ResponseEntity.ok(person);
+    }
 }
